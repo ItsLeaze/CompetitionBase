@@ -41,7 +41,7 @@
 /**
  * Disables fall damage.
  */
-#define NO_FALL_DAMAGE
+// #define NO_FALL_DAMAGE
 
 /**
  * Disables the scream that mario makes when falling off a great height (this is separate from actual fall damage).
@@ -91,12 +91,12 @@
 /**
  * Disables bonks when ground pounding next to a wall.
  */
-#define DISABLE_GROUNDPOUND_BONK
+// #define DISABLE_GROUNDPOUND_BONK
 
 /**
  * Allows Mario to jump kick on steep surfaces that are set to be non slippery, instead of being forced to dive.
  */
-#define JUMP_KICK_FIX
+// #define JUMP_KICK_FIX
 
 /**
  * Allows Mario to grab hangable ceilings from any state.
@@ -111,7 +111,7 @@
 /**
  * Makes Mario unable to ledge grab steep slopes to prevent false ledge grabs.
  */
-#define DONT_LEDGE_GRAB_STEEP_SLOPES
+// #define DONT_LEDGE_GRAB_STEEP_SLOPES
 
 /**
  * Buffers an A input if you jump off a slope during the landing lag
@@ -134,10 +134,10 @@
  * be interrupted with text
  * Uncomment this to fix this bug, and frustrate speedrunners
  */
-#define BUGFIX_DIALOG_TIME_STOP
+// #define BUGFIX_DIALOG_TIME_STOP
 
 /**
  * Inertia defines; allow Mario to preserve his momemtum when leaving moving platforms.
  */
-#define MARIO_INERTIA_UPWARD
+// #define MARIO_INERTIA_UPWARD
 // #define MARIO_INERTIA_LATERAL
