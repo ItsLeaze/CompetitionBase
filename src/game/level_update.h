@@ -46,6 +46,7 @@ enum WarpFlags {
     WARP_FLAG_DOOR_FLIP_MARIO = (1 << 1), // 0x02
     WARP_FLAG_DOOR_IS_WARP    = (1 << 2), // 0x04
     WARP_FLAG_EXIT_COURSE     = (1 << 3), // 0x08
+    WARP_FLAG_STAR_EXIT     = (1 << 4), // 0x10
 };
 
 enum MarioSpawnType {

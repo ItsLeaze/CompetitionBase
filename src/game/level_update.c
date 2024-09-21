@@ -634,6 +634,8 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
     } else if (warpFlags == WARP_FLAG_EXIT_COURSE) {
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    } else if (warpFlags == WARP_FLAG_STAR_EXIT) {
+        sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
     } else if (destLevel != gCurrLevelNum) {
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
     } else if (destArea != gCurrentArea->index) {
@@ -753,6 +755,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 
             case WARP_OP_STAR_EXIT:
                 sDelayedWarpTimer = 32;
+                sDelayedWarpArg = WARP_FLAG_STAR_EXIT;
                 sSourceWarpNodeId = WARP_NODE_DEFAULT;
                 gSavedCourseNum = COURSE_NONE;
                 play_transition(WARP_TRANSITION_FADE_INTO_MARIO, sDelayedWarpTimer, 0x00, 0x00, 0x00);
