@@ -27,6 +27,8 @@
 #include "puppycam2.h"
 #include "main.h"
 
+#include "plugins/main.h"
+
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
 #define LANGUAGE_FUNCTION gInGameLanguage
@@ -1604,6 +1606,10 @@ void render_pause_my_score_coins(void) {
     u8 courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
     u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
+    if (Hacktice_gEnabled) {
+        Hacktice_onPause();
+    }
+
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
@@ -1843,6 +1849,10 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    if (Hacktice_gEnabled) {
+        Hacktice_onPause();
+    }
 
     if (gDialogLineNum <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) { // Main courses
         courseName = segmented_to_virtual(courseNameTbl[gDialogLineNum]);

@@ -317,6 +317,7 @@ struct Object {
     /*0x218*/ void *collisionData;
     /*0x21C*/ Mat4 transform;
     /*0x25C*/ void *respawnInfo;
+    /*0x25C*/ u8 *respawnInfoPointer;
 };
 
 struct ObjectHitbox {

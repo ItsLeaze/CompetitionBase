@@ -276,7 +276,9 @@ SECTIONS
    END_SEG(engine)
    BEGIN_NOLOAD(engine)
    {
-      BUILD_DIR/src/game*.o(.*bss*);
+      _hackticeStateDataStart0 = .;
+      BUILD_DIR/src/game*.o(.bss*);
+      _hackticeStateDataEnd0 = .;
       BUILD_DIR/src/engine*.o(.bss*);
       . = ALIGN(0x40);
    }

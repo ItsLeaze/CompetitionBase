@@ -1,0 +1,17 @@
+extern const GeoLayout bob_area_1_geo[];
+extern const GeoLayout bob_area_1[];
+extern const Collision bob_area_1_collision[];
+extern const MacroObject bob_area_1_macro_objs[];
+extern u8 bob_dl_black_i8[];
+extern Vtx bob_dl_Base_mesh_layer_1_vtx_cull[8];
+extern Vtx bob_dl_Base_mesh_layer_1_vtx_0[24];
+extern Gfx bob_dl_Base_mesh_layer_1_tri_0[];
+extern Vtx bob_dl_Plane_mesh_layer_5_vtx_cull[8];
+extern Vtx bob_dl_Plane_mesh_layer_5_vtx_0[4];
+extern Gfx bob_dl_Plane_mesh_layer_5_tri_0[];
+extern Gfx mat_bob_dl_test_material[];
+extern Gfx mat_revert_bob_dl_test_material[];
+extern Gfx mat_bob_dl_death_plane[];
+extern Gfx mat_revert_bob_dl_death_plane[];
+extern Gfx bob_dl_Base_mesh_layer_1[];
+extern Gfx bob_dl_Plane_mesh_layer_5[];

@@ -28,6 +28,8 @@ enum RespawnInfoType {
 };
 
 /* respawnInfo */
+#define RESPAWN_INFO_NONE                           0x00
+#define RESPAWN_INFO_NO_COINS                       0x01
 #define RESPAWN_INFO_DONT_RESPAWN                   0xFF
 
 /* oFlags */
