@@ -17,13 +17,20 @@
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
 
+void Hacktice_onWarp(struct WarpDest sWarpDest)
+{
+    if (sWarpDest.type == WARP_TYPE_CHANGE_AREA || sWarpDest.type == WARP_TYPE_CHANGE_LEVEL) {
+        reset_timer();
+        start_timer();
+    }
+}
+
 void Hacktice_onFrame()
 {
     // SoftReset_onFrame();
     HackticeSetStatus(HACKTICE_STATUS_ACTIVE);
     if (PLAY_MODE_NORMAL == sCurrPlayMode && !gInMenu)
     {
-        TextManager_addLine("NORMAL", 30);
         Death_onNormal();
         LevelReset_onNormal();
         SaveState_onNormal();

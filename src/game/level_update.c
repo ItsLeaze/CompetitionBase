@@ -460,7 +460,7 @@ void warp_area(void) {
     if (sWarpDest.type != WARP_TYPE_NOT_WARPING) {
         if (sWarpDest.type == WARP_TYPE_CHANGE_AREA) {
             if (!Hacktice_gEnabled) {
-                level_control_timer(TIMER_CONTROL_HIDE);
+                Hacktice_onWarp(sWarpDest);
             }
             unload_mario_area();
             load_area(sWarpDest.areaIdx);
@@ -475,6 +475,7 @@ void warp_level(void) {
     gCurrLevelNum = sWarpDest.levelNum;
 
     level_control_timer(TIMER_CONTROL_HIDE);
+    Hacktice_onWarp(sWarpDest);
 
     load_area(sWarpDest.areaIdx);
     init_mario_after_warp();

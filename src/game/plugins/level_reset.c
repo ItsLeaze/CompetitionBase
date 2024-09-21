@@ -51,10 +51,9 @@ static void miniResetCommon()
     gHudDisplay.coins = 0;
     gMarioStates->numCoins = 0;
     gSnowParticleCount = 5;
-    gHudDisplay.timer = 0;
-    sTimerRunning = true;
-    Timer_reset();
     sWarpDest.type = 2;
+    reset_timer();
+    start_timer();
     resetCamera();
     resetTransition();
 }
@@ -94,10 +93,10 @@ void LevelReset_onNormal()
         sWarpDest.nodeId = 0xa;
         gMarioStates->health = 0x880;
         sCurrPlayMode = 0x4;
-        gHudDisplay.timer = 0;
-        sTimerRunning = true;
         sTimerRunningDeferred = true;
         sReloadObjectsAreasMask = ~0;
+        reset_timer();
+        start_timer();
     }
 
     LevelConv_PlainLevels warp = Config_warpIdAndReset();
@@ -111,11 +110,10 @@ void LevelReset_onNormal()
         sWarpDest.nodeId = 0xa;
         gMarioStates->health = 0x880;
         sCurrPlayMode = 0x4;
-        gHudDisplay.timer = 0;
-        sTimerRunning = true;
         sTimerRunningDeferred = true;
         sReloadObjectsAreasMask = ~0;
-        Timer_reset();
+        reset_timer();
+        start_timer();
         resetCamera();
     }
 }
