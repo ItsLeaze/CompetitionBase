@@ -17,7 +17,8 @@
     #define EEPROM_SIZE 0x200
 #endif
 
-#define NUM_SAVE_FILES 4
+#define NUM_SAVE_FILES 1
+#define NUM_SCORES_PER_STAGE 7
 
 struct SaveBlockSignature {
     u16 magic;
@@ -46,11 +47,13 @@ struct SaveFile {
     struct SaveBlockSignature signature; // 32 bits
 };
 
+struct HighScores {
+    u16 times[COURSE_STAGES_COUNT][NUM_SCORES_PER_STAGE];
+    u8 filler[sizeof(struct SaveFile) * 4 - sizeof(u16) * COURSE_STAGES_COUNT * NUM_SCORES_PER_STAGE];
+};
+
 enum SaveFileIndex {
-    SAVE_FILE_A,
-    SAVE_FILE_B,
-    SAVE_FILE_C,
-    SAVE_FILE_D
+    SAVE_FILE_A
 };
 
 struct MainMenuSaveData {
@@ -80,6 +83,7 @@ struct MainMenuSaveData {
 struct SaveBuffer {
     // Each of the four save files has two copies. If one is bad, the other is used as a backup.
     struct SaveFile files[NUM_SAVE_FILES][2];
+    struct HighScores highScores[1];
     // Main menu data, storing config options.
     struct MainMenuSaveData menuData;
 };

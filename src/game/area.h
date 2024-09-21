@@ -137,9 +137,6 @@ struct WarpTransition {
 
 enum CurrSaveFileNum {
     SAVE_FILE_NUM_A = 0x1,
-    SAVE_FILE_NUM_B,
-    SAVE_FILE_NUM_C,
-    SAVE_FILE_NUM_D,
 };
 
 enum MenuOption {

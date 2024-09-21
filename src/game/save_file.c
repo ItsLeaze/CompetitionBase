@@ -28,6 +28,7 @@ u16 SAVE_FILE_MAGIC = 0x4441;
 #define SAVE_FILE_MAGIC 0x4441
 #endif
 
+// STATIC_ASSERT(sizeof(struct HighScores) == sizeof(struct SaveFile) * 4, "HighScores size must match");
 //STATIC_ASSERT(sizeof(struct SaveBuffer) == EEPROM_SIZE, "eeprom buffer size must match");
 
 extern struct SaveBuffer gSaveBuffer;
@@ -318,12 +319,19 @@ void save_file_do_save(s32 fileIndex) {
         gSaveFileModified = FALSE;
     }
 
+    write_eeprom_data(gSaveBuffer.highScores, sizeof(gSaveBuffer.highScores));
+
     save_main_menu_data();
 }
 
 void save_file_erase(s32 fileIndex) {
     touch_high_score_ages(fileIndex);
     bzero(&gSaveBuffer.files[fileIndex][0], sizeof(gSaveBuffer.files[fileIndex][0]));
+
+    /* Don't delete highscores on file erase
+     * // bzero(&gSaveBuffer.highScores, sizeof(gSaveBuffer.highScores));
+     * // bzero(&gSaveBuffer, sizeof(gSaveBuffer));
+     */
 
     gSaveFileModified = TRUE;
     save_file_do_save(fileIndex);
