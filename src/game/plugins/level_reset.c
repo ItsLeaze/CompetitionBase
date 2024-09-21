@@ -7,6 +7,7 @@
 #include "game/envfx_snow.h"
 #include "object_constants.h"
 #include "libc/stddef.h"
+#include "config.h"
 
 #include "cfg.h"
 #include "timer.h"
@@ -71,6 +72,12 @@ void LevelReset_onNormal()
     {
         sTimerRunningDeferred = false;
         miniResetCommon();
+    }
+
+    if(sWarpDest.levelNum == 0) {
+        sWarpDest.levelNum = START_LEVEL;
+        sWarpDest.areaIdx = 1;
+        sWarpDest.nodeId = 0xa;
     }
 
     Config_ButtonAction action = Config_action();

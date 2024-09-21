@@ -5,6 +5,7 @@
 struct Timer {
     s8 running;
     s8 display;
+    s8 dirty;
     u16 time;
     u16 real_time;
     s8 collectedStarId; /* ID of the star that has just been collected or -1 otherwise */
@@ -17,5 +18,6 @@ void stop_timer(void);
 void show_timer(void);
 void hide_timer(void);
 void reset_timer(void);
+void set_timer_dirty(void);
 
 void Timer_onFrame();

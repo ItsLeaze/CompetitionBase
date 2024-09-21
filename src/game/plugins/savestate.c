@@ -3,6 +3,7 @@
 #include "binary.h"
 #include "cfg.h"
 #include "text_manager.h"
+#include "timer.h"
 
 #include "game/area.h"
 #include "game/camera.h"
@@ -64,7 +65,7 @@ void SaveState_onNormal()
         {
             if (Hacktice_gState->area == gCurrAreaIndex && Hacktice_gState->level == gCurrLevelNum)
             {
-                TextManager_addLine("DO LOAD", 30);
+                set_timer_dirty();
                 memcpy(_hackticeStateDataStart0, Hacktice_gState->memory, _hackticeStateDataEnd0 - _hackticeStateDataStart0);
                 // memcpy(_hackticeStateDataStart1, Hacktice_gState->memory + (_hackticeStateDataEnd0 - _hackticeStateDataStart0), _hackticeStateDataEnd1 - _hackticeStateDataStart1);
                 memcpy(gMarioAnimsMemAlloc, Hacktice_gState->memory + (_hackticeStateDataEnd0 - _hackticeStateDataStart0), MARIO_ANIMS_POOL_SIZE);
@@ -80,6 +81,5 @@ void SaveState_onPause()
      || (Config_saveStateStyle() == Config_StateSaveStyle_BUTTON && Config_action() == Config_ButtonAction_LOAD_STATE))
     {
         sMustSaveState = true;
-        TextManager_addLine("STATE SET", 30);
     }
 }

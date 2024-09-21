@@ -29,6 +29,11 @@ void reset_timer(void) {
     timer.time = 0;
     timer.real_time = 0;
     timer.collectedStarId = -1;
+    timer.dirty = FALSE;
+}
+
+void set_timer_dirty(void) {
+    timer.dirty = TRUE;
 }
 
 void increment_timer() {
