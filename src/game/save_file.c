@@ -20,6 +20,8 @@
 #endif
 #include "puppycam2.h"
 
+#include "plugins/main.h"
+
 #ifdef UNIQUE_SAVE_DATA
 u16 MENU_DATA_MAGIC = 0x4849;
 u16 SAVE_FILE_MAGIC = 0x4441;
@@ -322,6 +324,8 @@ void save_file_do_save(s32 fileIndex) {
     write_eeprom_data(gSaveBuffer.highScores, sizeof(gSaveBuffer.highScores));
 
     save_main_menu_data();
+
+    Hacktice_onSave();
 }
 
 void save_file_erase(s32 fileIndex) {

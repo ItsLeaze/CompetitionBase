@@ -9,6 +9,7 @@
 #include "game/camera.h"
 #include "game/print.h"
 #include "game/level_update.h"
+#include "game/save_file.h"
 #include "libc/string.h"
 
 void set_play_mode(s16 playMode);
@@ -31,6 +32,11 @@ extern u8 _hackticeStateDataEnd0[];
 struct Timer savedTimer; // TODO don't save this explicitly
 
 static bool sMustSaveState = 0;
+
+void clear_savestate() {
+    Hacktice_gState->level = -1;
+    Hacktice_gState->area = -1;
+}
 
 static void resetCamera()
 {

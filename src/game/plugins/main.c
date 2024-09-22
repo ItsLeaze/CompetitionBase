@@ -17,6 +17,10 @@
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
 
+void Hacktice_onSave() {
+    clear_savestate();
+}
+
 void Hacktice_onStarCollect(s16 starId) {
     timer.collectedStarId = starId;
 }

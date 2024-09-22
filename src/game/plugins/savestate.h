@@ -2,6 +2,7 @@
 
 #include "types.h"
 
+void clear_savestate();
 void SaveState_onPause();
 void SaveState_onNormal();
 
