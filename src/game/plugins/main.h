@@ -2,6 +2,7 @@
 
 #include "bool.h"
 
+void Hacktice_setMode(bool singleStar);
 void Hacktice_onSave();
 void Hacktice_onStarCollect(s16 starId);
 void Hacktice_onWarp(struct WarpDest sWarpDest);

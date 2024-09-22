@@ -13,6 +13,26 @@ char Config_gWarp;
 char Config_gMusicNumber;
 char Config_gOnDeathAction;
 
+const Config singlestar_config = {
+    .magic = HACKTICE_CONFIG_CANARY,
+    .selfSize = sizeof(Config),
+    .timerShow = true,
+    .lAction = Config_ButtonAction_LEVEL_RESET,
+    .cButtonsAction = Config_ButtonAction_LOAD_STATE,
+    .dpadDownAction = Config_ButtonAction_LOAD_STATE,
+    .stateSaveStyle = Config_StateSaveStyle_PAUSE,
+    .timerStyle = Config_TimerStyle_XCAM,
+    .deathAction = Config_DeathAction_LEVEL_RESET
+};
+
+Config fullgame_config = {
+    .magic = HACKTICE_CONFIG_CANARY,
+    .selfSize = sizeof(Config),
+    .timerShow = true,
+    .timerStyle = Config_TimerStyle_XCAM,
+    .deathAction = Config_DeathAction_LEVEL_RESET
+};
+
 Config Hacktice_gConfig = {
     .magic = HACKTICE_CONFIG_CANARY,
     .selfSize = sizeof(Config),
@@ -382,4 +402,8 @@ Config_ButtonAction Config_action()
     }
 
     return Config_ButtonAction_OFF;
+}
+
+void set_game_mode(bool singleStar) {
+    Hacktice_gConfig = singleStar ? singlestar_config : fullgame_config;
 }

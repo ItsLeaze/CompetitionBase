@@ -101,7 +101,8 @@ unsigned char textEraseFileButton[] = { TEXT_ERASE_FILE_BUTTON };
 unsigned char textLanguageSelect[][17] = { { TEXT_LANGUAGE_SELECT } };
 #endif
 
-unsigned char textMarioA[] = { TEXT_FILE_MARIO_A };
+unsigned char textSingleStar[] = { TEXT_SINGLE_STAR_MODE };
+unsigned char textFullGame[] = { TEXT_FULL_GAME_MODE };
 
 unsigned char textNew[] = { TEXT_NEW };
 unsigned char starIcon[] = { GLYPH_STAR, GLYPH_SPACE };
@@ -401,14 +402,14 @@ static const Vec3s sSaveFileButtonPositions[] = {
  */
 void render_menu_buttons(s32 selectedButtonID) {
     struct Object *button = sMainMenuButtons[selectedButtonID];
-    s32 idx = (selectedButtonID) * 2;
+    s32 idx = 3;
 
     // File A
     sMainMenuButtons[idx + 0] = SPAWN_FILE_SELECT_FILE_BUTTON(button, SAVE_FILE_A);
     sMainMenuButtons[idx + 0]->oMenuButtonScale = MENU_BUTTON_SCALE;
 
     sMainMenuButtons[idx + 1] =
-        spawn_object_rel_with_rot(button, MODEL_MAIN_MENU_YELLOW_FILE_BUTTON,
+        spawn_object_rel_with_rot(button, MODEL_MAIN_MENU_BLUE_COPY_BUTTON,
                                   bhvMenuButton,  711, -388, -100, 0x0, -0x8000, 0x0);
     sMainMenuButtons[idx + 1]->oMenuButtonScale = MENU_BUTTON_SCALE;
 }
@@ -586,6 +587,11 @@ void bhv_menu_button_manager_init(void) {
     // File A
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A] = SPAWN_FILE_SELECT_FILE_BUTTON_INIT(SAVE_FILE_A);
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A]->oMenuButtonScale = 1.0f;
+
+    sMainMenuButtons[MENU_BUTTON_PLAY_SPEEDRUN_MODE] = spawn_object_rel_with_rot(
+        gCurrentObject, MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE, bhvMenuButton, 2400, 2800, 0, 0, 0, 0);
+    sMainMenuButtons[MENU_BUTTON_PLAY_SPEEDRUN_MODE]->oMenuButtonScale = 1.0f;
+
     // Erase menu button
     sMainMenuButtons[MENU_BUTTON_ERASE] = spawn_object_rel_with_rot(
         o, MODEL_MAIN_MENU_RED_ERASE_BUTTON, bhvMenuButton, -6400, -3500, 0, 0x0, 0x0, 0x0);
@@ -625,6 +631,13 @@ void check_main_menu_clicked_buttons(void) {
             queue_rumble_decay(1);
 #endif
             break;
+        case MENU_BUTTON_PLAY_SPEEDRUN_MODE:
+            play_sound(SAVE_FILE_SOUND, gGlobalSoundSource);
+#if ENABLE_RUMBLE
+            queue_rumble_data(60, 70);
+            func_sh_8024C89C(1);
+#endif
+            break;
         // Play sound of the button clicked and render buttons of that menu.
         case MENU_BUTTON_ERASE:
             play_sound(SOUND_MENU_CAMERA_ZOOM_IN, gGlobalSoundSource);
@@ -651,7 +664,13 @@ void bhv_menu_button_manager_loop(void) {
             break;
 
         case MENU_BUTTON_PLAY_FILE_A:
+            Hacktice_setMode(TRUE);
             load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A], 1);
+            break;
+
+        case MENU_BUTTON_PLAY_SPEEDRUN_MODE:
+            Hacktice_setMode(FALSE);
+            load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_SPEEDRUN_MODE], 1);
             break;
 
         case MENU_BUTTON_ERASE:
@@ -813,9 +832,6 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
         // Print star count
         int_to_str(starCount, starCountText);
         print_hud_lut_string(HUD_LUT_GLOBAL, x + offset + 16, y, starCountText);
-    } else {
-        // Print "new" text
-        print_hud_lut_string(HUD_LUT_GLOBAL, x, y, LANGUAGE_ARRAY(textNew));
     }
 }
 
@@ -824,7 +840,7 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
 #define SAVEFILE_X1   92
 #define SAVEFILE_X2  209
 #define MARIOTEXT_X1  92
-#define MARIOTEXT_X2 207
+#define MARIOTEXT_X2 220
 
 /**
  * Prints main menu strings that shows on the yellow background menu screen.
@@ -849,7 +865,8 @@ void print_main_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(MARIOTEXT_X1, 65, textMarioA);
+    print_menu_generic_string(MARIOTEXT_X1, 65, textSingleStar);
+    print_menu_generic_string(MARIOTEXT_X2, 65, textFullGame);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
@@ -1048,7 +1065,7 @@ void print_erase_menu_strings(void) {
     // Print file names
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_menu_generic_string(89, 62, textMarioA);
+    print_menu_generic_string(89, 62, textSingleStar);
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 

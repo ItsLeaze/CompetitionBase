@@ -16,6 +16,10 @@
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
 
+void Hacktice_setMode(bool singleStar) {
+    set_game_mode(singleStar);
+}
+
 void Hacktice_onSave() {
     clear_savestate();
 }

@@ -126,3 +126,5 @@ static inline bool Config_checkpointRed() { return Hacktice_gConfig.checkpointRe
 static inline bool Config_checkpointCoin() { return Hacktice_gConfig.checkpointCoin; }
 static inline bool Config_checkpointObject() { return Hacktice_gConfig.checkpointObject; }
 static inline bool Config_checkpointPlatform() { return Hacktice_gConfig.checkpointPlatform; }
+
+void set_game_mode(bool singleStar);

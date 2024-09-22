@@ -191,8 +191,10 @@
  * File Select Text
  */
 // Main Screens
+#define TEXT_SINGLE_STAR_MODE _("SINGLE STAR")
+#define TEXT_FULL_GAME_MODE _("FULL GAME")
 #define TEXT_MARIO _("MARIO") // View Score Menu
-#define TEXT_SELECT_FILE _("SELECT FILE")
+#define TEXT_SELECT_FILE _("MOVEMENT MASTERY")
 #define TEXT_CHECK_FILE _("CHECK FILE")
 #define TEXT_COPY_FILE _("COPY FILE")
 #define TEXT_ERASE_FILE _("ERASE FILE")
