@@ -50,7 +50,6 @@ typedef struct
     char _customTextReserved; // must be always '\0'
 
     char showCustomText;
-    char softReset;
     char _pad0;
     char _pad1;
 } Config;

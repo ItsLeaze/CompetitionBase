@@ -99,7 +99,6 @@ static const ConfigDescriptor sGeneralDescriptors[] =
     { &Config_gMusicNumber,    uMUSIC_NUMBER,  lMusicNumbers, 64 },
 
     { &Hacktice_gConfig.warpWheel,     uWARP_WHEEL, VALUE_NAMES(onOffValueNames) },
-    { &Hacktice_gConfig.softReset,     uSOFT_RESET, VALUE_NAMES(onOffValueNames) },
 };
 #define sGeneralMaxAllowedOption (sizeof(sGeneralDescriptors) / sizeof(*sGeneralDescriptors) - 1)
 

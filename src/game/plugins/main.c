@@ -10,7 +10,6 @@
 #include "level_reset.h"
 #include "savestate.h"
 #include "shared.h"
-#include "soft_reset.h"
 #include "status.h"
 #include "text_manager.h"
 #include "timer.h"
@@ -35,7 +34,6 @@ void Hacktice_onWarp(struct WarpDest sWarpDest)
 
 void Hacktice_onFrame()
 {
-    // SoftReset_onFrame();
     HackticeSetStatus(HACKTICE_STATUS_ACTIVE);
     if (PLAY_MODE_NORMAL == sCurrPlayMode && !gInMenu)
     {

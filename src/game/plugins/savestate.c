@@ -79,6 +79,9 @@ void SaveState_onNormal()
                 // memcpy(_hackticeStateDataStart1, Hacktice_gState->memory + (_hackticeStateDataEnd0 - _hackticeStateDataStart0), _hackticeStateDataEnd1 - _hackticeStateDataStart1);
                 memcpy(gMarioAnimsMemAlloc, Hacktice_gState->memory + (_hackticeStateDataEnd0 - _hackticeStateDataStart0), MARIO_ANIMS_POOL_SIZE);
                 resetCamera();
+                // TODO this is hacky, but ensures that the C-Buttons count as already pressed after savestate (so you don't have to release all of them on the same frame)
+                sCButtonsPressed |= U_CBUTTONS | D_CBUTTONS | R_CBUTTONS | L_CBUTTONS;
+                gPlayer1Controller->buttonDown |= U_CBUTTONS | D_CBUTTONS | R_CBUTTONS | L_CBUTTONS;
             }
         }
     }

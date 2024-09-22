@@ -34,7 +34,6 @@
 
 #include "plugins/cfg.h"
 #include "plugins/main.h"
-#include "plugins/soft_reset.h"
 
 // Emulators that the Instant Input patch should not be applied to
 #define INSTANT_INPUT_BLACKLIST (EMU_CONSOLE | EMU_WIIVC | EMU_ARES | EMU_SIMPLE64 | EMU_CEN64)
@@ -615,7 +614,7 @@ void read_controller_inputs(s32 threadID) {
     run_demo_inputs();
 #endif
 
-    for (s32 cont = 0; cont < MAX_NUM_PLAYERS; cont++) {
+    for (s32 cont = 0; cont < 1; cont++) {
         struct Controller* controller = &gControllers[cont];
         OSContPadEx* controllerData = controller->controllerData;
 
@@ -821,10 +820,6 @@ void thread5_game_loop(UNUSED void *arg) {
             Hacktice_onFrame();
         }
         const int ResetCombo = L_TRIG | Z_TRIG;
-        if (Hacktice_gConfig.softReset)
-        {
-            SoftReset_onFrame();
-        }
         profiler_update(PROFILER_TIME_CONTROLLERS, 0);
         profiler_collision_reset();
         addr = level_script_execute(addr);
