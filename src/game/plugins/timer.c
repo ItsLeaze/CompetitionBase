@@ -72,7 +72,7 @@ void Timer_onFrame() {
 
     bool grabCondition = gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB;
     bool xcamCondition =
-        gMarioStates->action == ACT_STAR_DANCE_WATER || gMarioStates->action == ACT_STAR_DANCE_EXIT;
+        gMarioStates->action == ACT_STAR_DANCE_WATER || gMarioStates->action == ACT_STAR_DANCE_EXIT || gMarioStates->action == ACT_STAR_DANCE_NO_EXIT;
     bool timerCondition = grabCondition || xcamCondition;
 
     if (Config_timerStyle() == Config_TimerStyle_GRAB) {
@@ -85,9 +85,5 @@ void Timer_onFrame() {
         if (xcamCondition) {
             stop_timer();
         }
-    }
-
-    if (gMarioStates->action == ACT_STAR_DANCE_NO_EXIT && !Config_timerStopOnCoinStar()) {
-        start_timer();
     }
 }

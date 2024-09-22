@@ -25,22 +25,23 @@ void Hacktice_onSave() {
 }
 
 void Hacktice_onStarCollect(s16 starId) {
-    timer.collectedStarId = starId;
-}
-
-void Hacktice_onWarp(struct WarpDest sWarpDest)
-{
-    if (sWarpDest.type == WARP_TYPE_CHANGE_AREA || sWarpDest.type == WARP_TYPE_CHANGE_LEVEL) {
-        reset_timer();
-        start_timer();
+    if (timer.running) {
+        timer.collectedStarId = starId;
     }
 }
 
-void Hacktice_onFrame()
-{
+void Hacktice_onWarp(struct WarpDest sWarpDest) {
+    if (sWarpDest.type == WARP_TYPE_CHANGE_AREA || sWarpDest.type == WARP_TYPE_CHANGE_LEVEL) {
+        reset_timer();
+        start_timer();
+        gMarioState->numCoins = 0;
+        gHudDisplay.coins = 0;
+    }
+}
+
+void Hacktice_onFrame() {
     HackticeSetStatus(HACKTICE_STATUS_ACTIVE);
-    if (PLAY_MODE_NORMAL == sCurrPlayMode && !gInMenu)
-    {
+    if (PLAY_MODE_NORMAL == sCurrPlayMode && !gInMenu) {
         Death_onNormal();
         LevelReset_onNormal();
         SaveState_onNormal();
@@ -50,8 +51,7 @@ void Hacktice_onFrame()
     TextManager_onFrame();
 }
 
-void Hacktice_onPause()
-{
+void Hacktice_onPause() {
     SaveState_onPause();
     Config_onPause();
 }

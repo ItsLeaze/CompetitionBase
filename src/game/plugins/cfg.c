@@ -22,7 +22,8 @@ const Config singlestar_config = {
     .dpadDownAction = Config_ButtonAction_LOAD_STATE,
     .stateSaveStyle = Config_StateSaveStyle_PAUSE,
     .timerStyle = Config_TimerStyle_XCAM,
-    .deathAction = Config_DeathAction_LEVEL_RESET
+    .deathAction = Config_DeathAction_LEVEL_RESET,
+    .timerStopOnCoinStar = TRUE
 };
 
 Config fullgame_config = {
@@ -42,7 +43,8 @@ Config Hacktice_gConfig = {
     .dpadDownAction = Config_ButtonAction_LOAD_STATE,
     .stateSaveStyle = Config_StateSaveStyle_PAUSE,
     .timerStyle = Config_TimerStyle_XCAM,
-    .deathAction = Config_DeathAction_LEVEL_RESET
+    .deathAction = Config_DeathAction_LEVEL_RESET,
+    .timerStopOnCoinStar = TRUE
 };
 
 typedef struct ConfigDescriptor
