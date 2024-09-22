@@ -28,6 +28,8 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 
+#include "plugins/cfg.h"
+
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
 static struct Object *sEndRightToadObj;
@@ -50,7 +52,7 @@ static s8 sPeachManualBlinkTime = 0;
 static s8 sPeachIsBlinking = FALSE;
 static s8 sPeachBlinkTimes[7] = { 2, 3, 2, 1, 2, 3, 2 };
 
-static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
+static u8 sStarsNeededForDialog[] = { 999 };
 
 /**
  * Data for the jumbo star cutscene. It specifies the flight path after triple
@@ -620,12 +622,17 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 break;
 
             case 80:
-                if (!(m->actionArg & 1)) {
+                if (!(m->actionArg & 1) || cfg_reload_on_coin_star()) {
                     level_trigger_warp(m, WARP_OP_STAR_EXIT);
                 } else {
-                    enable_time_stop();
-                    create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
-                    m->actionState = ACT_STATE_STAR_DANCE_DO_SAVE;
+                    if (cfg_save_dialog_on_coin_star()) {
+                        enable_time_stop();
+                        create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
+                        m->actionState = ACT_STATE_STAR_DANCE_DO_SAVE;
+                    } else {
+                        m->actionState = ACT_STATE_STAR_DANCE_RETURN;
+                    }
+                    
                 }
                 break;
         }

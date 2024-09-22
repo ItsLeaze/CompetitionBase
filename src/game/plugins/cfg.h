@@ -27,6 +27,8 @@ typedef struct
     char timerShow;
     char timerStyle;
     char timerStopOnCoinStar;
+    char reloadOnCoinStar;
+    char saveDialogOnCoinStar;
     char stateSaveStyle;
     char muteMusic;
     char deathAction;
@@ -128,3 +130,5 @@ static inline bool Config_checkpointObject() { return Hacktice_gConfig.checkpoin
 static inline bool Config_checkpointPlatform() { return Hacktice_gConfig.checkpointPlatform; }
 
 void set_game_mode(bool singleStar);
+bool cfg_reload_on_coin_star();
+bool cfg_save_dialog_on_coin_star();

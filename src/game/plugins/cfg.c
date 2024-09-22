@@ -23,7 +23,9 @@ const Config singlestar_config = {
     .stateSaveStyle = Config_StateSaveStyle_PAUSE,
     .timerStyle = Config_TimerStyle_XCAM,
     .deathAction = Config_DeathAction_LEVEL_RESET,
-    .timerStopOnCoinStar = TRUE
+    .timerStopOnCoinStar = TRUE,
+    .reloadOnCoinStar = TRUE,
+    .saveDialogOnCoinStar = FALSE
 };
 
 Config fullgame_config = {
@@ -31,7 +33,8 @@ Config fullgame_config = {
     .selfSize = sizeof(Config),
     .timerShow = true,
     .timerStyle = Config_TimerStyle_XCAM,
-    .deathAction = Config_DeathAction_LEVEL_RESET
+    .deathAction = Config_DeathAction_LEVEL_RESET,
+    .saveDialogOnCoinStar = FALSE
 };
 
 Config Hacktice_gConfig = {
@@ -44,7 +47,9 @@ Config Hacktice_gConfig = {
     .stateSaveStyle = Config_StateSaveStyle_PAUSE,
     .timerStyle = Config_TimerStyle_XCAM,
     .deathAction = Config_DeathAction_LEVEL_RESET,
-    .timerStopOnCoinStar = TRUE
+    .timerStopOnCoinStar = TRUE,
+    .reloadOnCoinStar = TRUE,
+    .saveDialogOnCoinStar = FALSE
 };
 
 typedef struct ConfigDescriptor
@@ -408,4 +413,10 @@ Config_ButtonAction Config_action()
 
 void set_game_mode(bool singleStar) {
     Hacktice_gConfig = singleStar ? singlestar_config : fullgame_config;
+}
+bool cfg_reload_on_coin_star() {
+    return Hacktice_gConfig.reloadOnCoinStar;
+}
+bool cfg_save_dialog_on_coin_star() {
+    return Hacktice_gConfig.saveDialogOnCoinStar;
 }

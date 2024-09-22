@@ -19,6 +19,9 @@
 void Hacktice_setMode(bool singleStar) {
     set_game_mode(singleStar);
 }
+bool Hacktice_isSingleStar() {
+    get_game_mode();
+}
 
 void Hacktice_onSave() {
     clear_savestate();
