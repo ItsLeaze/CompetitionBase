@@ -8,7 +8,7 @@ struct Timer {
     s8 dirty;
     u16 time;
     u16 real_time;
-    s8 collectedStarId; /* ID of the star that has just been collected or -1 otherwise */
+    s16 collectedStarId; /* ID of the star that has just been collected or -1 otherwise */
 };
 
 extern struct Timer timer;

@@ -28,6 +28,7 @@ extern u8 _hackticeStateDataEnd0[];
 // extern u8 _hackticeStateDataStart1[];
 // extern u8 _hackticeStateDataEnd1[];
 #endif
+struct Timer savedTimer; // TODO don't save this explicitly
 
 static bool sMustSaveState = 0;
 
@@ -51,6 +52,7 @@ void SaveState_onNormal()
 {
     if (sMustSaveState)
     {
+        savedTimer = timer;
         sMustSaveState = false;
         Hacktice_gState->area  = gCurrAreaIndex;
         Hacktice_gState->level = gCurrLevelNum;
@@ -65,6 +67,7 @@ void SaveState_onNormal()
         {
             if (Hacktice_gState->area == gCurrAreaIndex && Hacktice_gState->level == gCurrLevelNum)
             {
+                timer = savedTimer;
                 set_timer_dirty();
                 memcpy(_hackticeStateDataStart0, Hacktice_gState->memory, _hackticeStateDataEnd0 - _hackticeStateDataStart0);
                 // memcpy(_hackticeStateDataStart1, Hacktice_gState->memory + (_hackticeStateDataEnd0 - _hackticeStateDataStart0), _hackticeStateDataEnd1 - _hackticeStateDataStart1);

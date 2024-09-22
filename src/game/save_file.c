@@ -513,6 +513,46 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
     }
 }
 
+s8 save_file_register_new_time(s32 courseIndex, s16 starIndex, u16 time) {
+    if (time > 0 && time < save_file_get_best_time(courseIndex, starIndex)) {
+        gSaveBuffer.highScores[0].times[courseIndex][starIndex] = time;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+u16 save_file_get_best_time(s32 courseIndex, s16 starIndex) {
+    if (!save_file_best_time_exists(courseIndex, starIndex)) {
+        return 17999;
+    }
+    return gSaveBuffer.highScores[0].times[courseIndex][starIndex];
+}
+
+s8 save_file_best_time_exists(s32 courseIndex, s16 starIndex) {
+    return gSaveBuffer.highScores[0].times[courseIndex][starIndex] != 0;
+}
+
+u32 save_file_get_course_sob(s32 courseIndex) {
+    u32 sob;
+    u32 starFlags;
+    s16 i;
+
+    sob = 0;
+    starFlags = save_file_get_star_flags(0, courseIndex);
+
+    for (i = 0; i < 7; i++) {
+        if (starFlags & (1 << i) || save_file_best_time_exists(courseIndex, i)) {
+            u16 starPb = save_file_get_best_time(courseIndex, i);
+            sob += starPb;
+            if (sob > 17999) {
+                sob = 17999;
+            }
+        }
+    }
+
+    return sob;
+}
+
 s32 save_file_exists(s32 fileIndex) {
     return (gSaveBuffer.files[fileIndex][0].flags & SAVE_FLAG_FILE_EXISTS) != 0;
 }

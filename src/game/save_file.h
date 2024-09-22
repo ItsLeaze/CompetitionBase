@@ -175,6 +175,13 @@ void save_file_copy(s32 srcFileIndex, s32 destFileIndex);
 void save_file_load_all(void);
 void save_file_reload(void);
 void save_file_collect_star_or_key(s16 coinScore, s16 starIndex);
+
+// PB-System
+s8 save_file_register_new_time(s32 courseIndex, s16 starIndex, u16 time);
+u16 save_file_get_best_time(s32 courseIndex, s16 starIndex);
+s8 save_file_best_time_exists(s32 courseIndex, s16 starIndex);
+u32 save_file_get_course_sob(s32 courseIndex);
+
 s32 save_file_exists(s32 fileIndex);
 u32 save_file_get_max_coin_score(s32 courseIndex);
 s32 save_file_get_course_star_count(s32 fileIndex, s32 courseIndex);

@@ -25,6 +25,7 @@
 #include "rumble_init.h"
 #include "config.h"
 
+#include "plugins/main.h"
 #include "plugins/death_floor.h"
 
 u8  sDelayInvincTimer;
@@ -834,6 +835,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
 #else
         starIndex = (obj->oBehParams >> 24) & 0x1F;
 #endif
+        Hacktice_onStarCollect(starIndex);
         save_file_collect_star_or_key(m->numCoins, starIndex);
 
         m->numStars =

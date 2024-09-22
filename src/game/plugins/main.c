@@ -17,6 +17,10 @@
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
 
+void Hacktice_onStarCollect(s16 starId) {
+    timer.collectedStarId = starId;
+}
+
 void Hacktice_onWarp(struct WarpDest sWarpDest)
 {
     if (sWarpDest.type == WARP_TYPE_CHANGE_AREA || sWarpDest.type == WARP_TYPE_CHANGE_LEVEL) {

@@ -605,11 +605,16 @@ void render_hud(void) {
         }
 
         if (timer.display) {
+            u16 best_time;
             char *prefix = "";
             u32 distFromRightEdge = 150;
             render_hud_timer(timer.real_time, 0, prefix, distFromRightEdge);
-            if(timer.real_time != timer.time) {
-                render_hud_timer(timer.time, 1, prefix, distFromRightEdge);
+            if (timer.collectedStarId >= 0) {
+                best_time = save_file_get_best_time(COURSE_NUM_TO_INDEX(gCurrCourseNum), timer.collectedStarId);
+                render_hud_timer(best_time, 1, "PB", 120);
+                if(timer.real_time != timer.time) {
+                    render_hud_timer(timer.time, 2, "NOPAUSE", 200);
+                }
             }
         }
 
