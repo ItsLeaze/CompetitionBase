@@ -28,6 +28,7 @@
 #include "main.h"
 
 #include "plugins/main.h"
+#include "plugins/rank.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -1587,10 +1588,25 @@ void render_widescreen_setting(void) {
     #define TXT_COURSE_X      63
     #define TXT_STAR_X        98
     #define ACT_NAME_X        116
-    #define LVL_NAME_X        117
-    #define SECRET_LVL_NAME_X 94
+    #define LVL_NAME_X        137
+    #define SECRET_LVL_NAME_X 137
     #define MYSCORE_X         62
 #endif
+
+void render_scores_hud_lut(u8 courseIndex) {
+    int i;
+    u8 rankText[2] = { 0xFF, 0xFF };
+    for (i = 0; i < 7; i++) {
+        const s16 x = 30 + i * 40;
+        const s16 y = 36;
+        if (save_file_best_time_exists(courseIndex, i)) {
+            rankText[0] = time_to_rank(save_file_get_best_time(courseIndex, i), courseIndex, i).asU8;
+        } else {
+            rankText[0] = RANK_NONE_2;
+        }
+        print_hud_lut_string(HUD_LUT_GLOBAL, x, y, rankText);
+    }
+}
 
 void render_pause_my_score_coins(void) {
     u8 textCourse[] = { TEXT_COURSE };
@@ -1614,8 +1630,7 @@ void render_pause_my_score_coins(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
-        print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
+        render_scores_hud_lut(courseIndex);
     }
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
@@ -1623,30 +1638,12 @@ void render_pause_my_score_coins(void) {
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
-        && (save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0)) {
-        print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
-    }
-
     u8 *courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
-        int_to_str(gCurrCourseNum, strCourseNum);
-        print_generic_string(CRS_NUM_X1, 157, strCourseNum);
-
-        u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
-
-        if (starFlags & (1 << (gDialogCourseActNum - 1))) {
-            print_generic_string(TXT_STAR_X, 140, textStar);
-        } else {
-            print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
-        }
-
-        print_generic_string(ACT_NAME_X, 140, actName);
-        print_generic_string(LVL_NAME_X, 157, &courseName[3]);
+        print_generic_string(LVL_NAME_X, 215, &courseName[3]);
     } else {
-        print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
+        print_generic_string(SECRET_LVL_NAME_X, 215, &courseName[3]);
     }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
