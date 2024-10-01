@@ -12,7 +12,7 @@
 /**
  * Disables all debug options (except PUPPYPRINT).
  */
-// #define DISABLE_ALL
+#define DISABLE_ALL
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@
  * Enables a comprehensive standalone profiler. Automatically enabled by PUPPYPRINT_DEBUG.
  * If not using PUPPYPRINT_DEBUG, press L + D-Pad Up to toggle the profiler.
  */
-#define USE_PROFILER
+// #define USE_PROFILER
 
 /**
  * -- TEST LEVEL --
