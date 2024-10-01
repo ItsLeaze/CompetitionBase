@@ -39,6 +39,7 @@ void Hacktice_onWarp(struct WarpDest sWarpDest) {
         start_timer();
         gMarioState->numCoins = 0;
         gHudDisplay.coins = 0;
+        gMarioStates->health = 0x880;
     }
 }
 
