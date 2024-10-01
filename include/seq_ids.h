@@ -45,7 +45,19 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_ENDING,        // 0x20
     SEQ_MENU_FILE_SELECT,             // 0x21
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
+    SEQ_AQUAS,                        // 0x23
+    SEQ_BLADE_MAN,                    // 0x24
+    SEQ_CASINO_NIGHT,                 // 0x25
+    SEQ_DS_CASINO,                    // 0x26
+    SEQ_EVIL_FOUNDRY,                 // 0x27
+    SEQ_GEOTHERMAL,                   // 0x28
+    SEQ_MAP,                          // 0x29
+    SEQ_MIRAGE_SALOON_2,              // 0x2A
+    SEQ_MM_BAD,                       // 0x2B
+    SEQ_PLANET_WISP,                  // 0x2C
+    SEQ_PRESS_GARDEN_2,               // 0x2D
+    SEQ_SONIC_RACING,                 // 0x2E
     SEQ_COUNT
 };
-
+ 
 #endif // SEQ_IDS_H

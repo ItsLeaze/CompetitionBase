@@ -42,7 +42,11 @@
 #define _37s(frames) (FPS * 37 + frames)
 #define _38s(frames) (FPS * 38 + frames)
 #define _39s(frames) (FPS * 39 + frames)
-#define _40s(frames) (FPS * 40 + frames)
+#define _40s(seconds) ((FPS + seconds) * 40)
+#define _50s(seconds) ((FPS + seconds) * 50)
+#define _60s(seconds) ((FPS + seconds) * 60)
+#define _70s(seconds) ((FPS + seconds) * 70)
+#define _80s(seconds) ((FPS + seconds) * 80)
 
 #define RANK_NONE 0x9F
 #define RANK_NONE_2 GLYPH_MULTIPLY
